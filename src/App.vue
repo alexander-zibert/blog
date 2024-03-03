@@ -2,9 +2,11 @@
 
 <template>
   <header>
-    <h1>Statistic Widgets</h1>
+    <h1>Distributed Minds</h1>
     <p>
-      Some Widgets that help with forecasting, analytics, and other use cases.
+      Some writing about programming, system architecture, agile development.
+      There are also some widgets that help with forecasting, analytics, and
+      other use cases.
     </p>
     <nav>
       <a href="/" class="current">Home</a>
