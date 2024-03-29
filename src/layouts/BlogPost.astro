@@ -10,7 +10,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } =
   Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={heroImage.src}>
   <Fragment slot="head">
     <style>
       main {
