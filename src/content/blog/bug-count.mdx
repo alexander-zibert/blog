@@ -1,0 +1,46 @@
+---
+title: "Should I continue testing?"
+description: "Use math to determine the total bug count"
+pubDate: "2024-03-03"
+updatedDate: "2024-03-17"
+heroImage: "./images/two-testing-teams.jpeg"
+heroImageAlt: "Two testing teams finding and fixing bugs"
+---
+
+import BugCount from "./components/BugCount.vue";
+
+## Introduction
+
+In software testing, deciding whether to continue testing after
+encountering a certain number of bugs can be challenging. However, a
+method originating from ecology, known as [Mark and recapture](https://en.wikipedia.org/wiki/Mark_and_recapture),
+can provide a more informed decision-making process.
+
+This method involves employing two independent testing teams (or
+individuals), each operating without communication. Both teams record the
+bugs they find, and after a given time frame (e.g. two hours), they
+compare the number of bugs they have in common. The assumption is that if
+both teams have a significant overlap in the bugs they found, there may
+not be many more bugs to discover. Conversely, if both teams found many
+unique bugs, there is a higher probability that there are still many more
+to be discovered.
+
+## Considerations
+
+- Ensure that both testing teams work independently in the same part of
+  the system and refrain from making alterations to the system between
+  tests.
+- The resulting bug count from this widget is highly context-dependent. In
+  some systems, having 100 remaining bugs may still be acceptable, while
+  in others, aiming for under 3 is advisable.
+- You can also choose to test only a part of the system (e.g., the
+  purchase flow). By doing so, you will obtain an estimate of the
+  remaining bugs specific to that particular part of the system.
+
+<BugCount client:load />
+
+## Further Reading
+
+- Initially I found this on the [interactive blog](https://observablehq.com/@troymagennis/latent-defect-estimation?collection=@troymagennis/agile-software-development) of Troy Megennis
+- John D. Cook's [explanation](https://www.johndcook.com/blog/2010/07/13/lincoln-index/) of the method is much clearer than mine
+- This widget uses the [Chapman estimator](https://en.wikipedia.org/wiki/Mark_and_recapture#Chapman_estimator)

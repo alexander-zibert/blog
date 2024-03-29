@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <Fragment slot="main">
+    <h1>Distributed Minds</h1>
+    <p>
+      Welcome to my blog. Here you can find my writing about programming, system
+      architecture, agile development, and more. There are also some widgets
+      that help with forecasting, analytics, and other use cases.
+    </p>
+  </Fragment>
+</BaseLayout>
