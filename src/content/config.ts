@@ -14,6 +14,7 @@ const blog = defineCollection({
         (img) => img.width === 1024 && img.height === 512
       ),
       heroImageAlt: z.string(),
+      wip: z.boolean().optional(),
     }),
 });
 
