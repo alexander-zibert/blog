@@ -152,3 +152,21 @@ hr {
   /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
+
+pre.astro-code {
+  font-size: medium;
+}
+
+pre code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+pre code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 1rem;
+  margin-right: 1.5rem;
+  display: inline-block;
+  text-align: right;
+}
