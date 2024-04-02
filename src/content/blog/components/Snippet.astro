@@ -1,0 +1,12 @@
+---
+import { Code } from "astro:components";
+import fs from "node:fs";
+
+const { path, ...rest } = Astro.props;
+
+const code = fs
+  .readFileSync(`src/content/blog/snippets/${path}`, { encoding: "utf-8" })
+  .trim();
+---
+
+<Code code={code} wrap={true} {...rest} />
