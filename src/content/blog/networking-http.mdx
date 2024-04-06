@@ -9,8 +9,92 @@ wip: true
 
 import Snippet from "./components/Snippet.astro"
 
+## Levels of Abstraction
+
+- Browser (HTTP)
+- Node.js global `fetch` with `.text()`
+- Interlude 1: text encoding: ASCII, UTF-8, UTF-16
+  - Node.js global `fetch` with `body` stream and `node:stream` and `TextDecoder` (UTF-8) (HTTP)
+- Interlude 2: text compression: gzip
+  - Node.js `node:https` and `node:zlib` (HTTP)
+- Node.js `node:tls` (TCP/TLS)
+- Interlude 3: crypto
+  - Node.js `node:net` and `node:crypto` (TCP)
+- Interlude 4: DNS/UDP
+  - Node.js `node:dns`
+  - Node.js `node:dgram`
+- Linux TUN device (IP)
+- Linux TAP device (Ethernet)
+
+Extensions
+
+- gzip/brotli/zstd/lz4 compression algorithm
+- crypto deep dive (with WASM?)
+- http2
+- http3
+- BitTorrent
+- mail (smtp, pop3, imap)
+- RSS
+- video streams (hls?)
+- image compression
+- fonts (woff2)
+- audio compression
+- websocket
+- server sent events
+- SSH
+- FTP
+- DHCP
+- ARP
+- Border Gateway Protocol (BGP)
+- Erasure Codes for Transmission?
+
+Views
+- Server
+- Client
+- Hardware
+- ISP
+
+
+## Hardware involved
+
+- personal
+  - computer with OS
+  - ethernet card
+  - ethernet cable
+  - L2 switch
+  - L3 router
+- "shared" routers and cables
+  - L2 switches
+  - L3 routers
+  - cables
+- company x
+  - server
+  - cables
+
+
 - for further info about layout, rendering, and interactivity please see [Web Browser Engineering book](https://browser.engineering/)
 - 
 
-<Snippet path={"01-fetch.mjs"} lang='js' />
+<Snippet path={"01-fetch.mjs"} parts={[0]} lang='js' />
+
+- status code
+- content
+  - content-encoding: gzip
+  - content-language: en
+  - content-length: 54665
+  - content-type: text/html; charset=UTF-8
+- further download
+  - accept-ranges: bytes
+- browser cache
+  - cache-control: private, s-maxage=0, max-age=0, must-revalidate
+  - age: 26445
+  - date: Fri, 05 Apr 2024 07:55:06 GMT
+  - last-modified: Fri, 05 Apr 2024 06:57:38 GMT
+  - vary: Accept-Encoding,Cookie,Authorization
+- cookies
+  - set-cookie
+- security
+  - strict-transport-security: max-age=106384710; includeSubDomains; preload
+- custom headers
+  - x-...
 
