@@ -1,0 +1,114 @@
+---
+title: "Peeling Back the Layers: fetch"
+description: ""
+pubDate: "2024-04-01"
+heroImage: "./images/two-testing-teams.jpeg"
+heroImageAlt: ""
+wip: true
+---
+
+import Snippet from "./components/Snippet.astro";
+
+## Introduction
+
+Welcome to the first installment of my blog series aimed at demystifying the layers of abstraction surrounding internet and networking protocols.
+
+If you're a mid-level backend or frontend software engineer, you're likely familiar with high-level concepts like making HTTP requests using the `fetch` API of the browser or Node.js.
+However, have you ever wondered what happens beneath the surface when you initiate such a request?
+
+In this series, we'll embark on a journey together, starting from the familiar realm of web development with `fetch` as our point of entry.
+Our goal is to peel away the layers of abstraction one by one, delving deeper into the underlying technologies that power the internet.
+The series will use Node.js as experimentation platform to illustrate the concepts.
+So you'll likely learn about many of Node.js standard libraries.
+
+In this first article, we'll focus on understanding the fundamental concepts of web communication.
+Whether you're a seasoned developer or just beginning to explore the intricacies of networking, this series aims to provide you with a comprehensive understanding of the underlying mechanisms at play.
+
+So, grab your favorite beverage, fire up your code editor, and let's dive into the fascinating world of internet protocols, starting with `fetch`.
+
+What you Need:
+
+- Node.js >= v21.0.0 (Recommendation: Use the [Node Version Manager](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) for managing Node.js versions)
+- a code editor
+- (later) a Linux machine for raw packet sending
+
+What to Expect:
+
+- A breakdown of how the browser interacts with web servers using HTTP.
+- Exploring the `fetch` API and its role in making HTTP requests.
+- Understanding the basics of HTTP and the request-response cycle.
+- Practical examples and code snippets in Node.js to illustrate concepts.
+
+By the end of this article, you'll be ready to peel away the next layer of abstraction in our journey through the depths of networking protocols.
+
+## fetch
+
+### Basic Usage
+
+```js
+const response = await fetch(
+  "https://en.wikipedia.org/wiki/Internet_protocol_suite"
+);
+
+console.log("## Response Status");
+console.log(`${response.status} ${response.statusText}\n`);
+
+console.log("## Headers");
+for (const header of response.headers.entries()) {
+  console.log(header.join(": "));
+}
+
+console.log("## Body");
+const body = await response.text();
+console.log(body.slice(0, 1000));
+```
+
+- basic request/response
+- response headers
+
+- status code
+- content
+  - content-encoding: gzip
+  - content-language: en
+  - content-length: 54665
+  - content-type: text/html; charset=UTF-8
+- further download
+  - accept-ranges: bytes
+- browser cache
+  - cache-control: private, s-maxage=0, max-age=0, must-revalidate
+  - age: 26445
+  - date: Fri, 05 Apr 2024 07:55:06 GMT
+  - last-modified: Fri, 05 Apr 2024 06:57:38 GMT
+  - vary: Accept-Encoding,Cookie,Authorization
+- cookies
+  - set-cookie
+- security
+  - strict-transport-security: max-age=106384710; includeSubDomains; preload
+- custom headers (x-)
+
+- fetch compression is transparent
+- `text()`: The response is always decoded using UTF-8.
+
+### Experiments
+
+- try using different HTTP methods (e.g. `POST`, `PUT`, `DELETE`)
+- try using invalid HTTP methods (e.g. `INVALID`, `ABCDE`)
+- try using different `accept-encoding` headers
+- does the order of the headers matter to wikipedia?
+- send body data in a `GET` request
+
+### Default Request Headers
+
+- Node.js sets the `accept-encoding` header per default to `br, gzip, deflate`
+- Node.js http server
+- fetch Request + browser Request
+- Response Headers
+
+### Response Streaming
+
+- timing of header response
+- timing and length of chunks
+- fetch has transparent decompression but not text decoding
+- `util.TextDecoder`
+
+<Snippet path={"01-fetch.mjs"} parts={[0]} lang="js" />

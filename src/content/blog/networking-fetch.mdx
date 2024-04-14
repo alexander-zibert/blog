@@ -1,0 +1,97 @@
+---
+title: "Peeling Back the Layers: fetch"
+description: ""
+pubDate: "2024-04-01"
+heroImage: "./images/two-testing-teams.jpeg"
+heroImageAlt: ""
+wip: true
+---
+
+import Snippet from "./components/Snippet.astro";
+
+## Intro: HTTP in the Browser
+
+### Questions
+
+1. What are the parts of the URL "https://en.wikipedia.org/wiki/Internet_protocol_suite"?
+1. Open the network tab of your browser's devtools. Go to "https://en.wikipedia.org/wiki/Internet_protocol_suite". What do you see in the devtools?
+1. Which ressources does your browser download for you? How many bytes are downloaded?
+1. Which ressource is downloaded first?
+
+### Ressources
+
+- [Video: How a web browser builds and displays a web page](https://www.youtube.com/watch?v=DuSURHrZG6I)
+- [Video: What is HTTP?](https://www.youtube.com/watch?v=wW2A5SZ3GkI)
+- [Video: Demystifying the Browser Networking Tab in Developer Tools](https://www.youtube.com/watch?v=LBgfSwX4GDI)
+
+---
+
+## Snippet 1: Simple Fetch
+
+<Snippet path="01-fetch.mjs" lang="js" />
+
+### Questions
+
+1. What is the hostname of the server, we communicate with?
+1. Why do we need two awaits one for the `fetch` and the other for `response.text()`?
+1. What does the response status signify? What other important response status are there?
+1. Which request headers did we send?
+1. How does the browser know, which file format the response is?
+1. Why did we receive the `content-encoding: gzip` header? How can we receive a uncompressed version of the content? How does the `content-length` header change?
+1. Why do we not need to decompress the content?
+1. You just want to get the response headers? What happens if you modify the code so that we do not wait for the body? How can you improve this behavior?
+
+### Ressources
+
+The [MDN Web Docs](https://developer.mozilla.org/en-US/) have one of the best descriptions of basic HTTP communication. Here are some interesting articles:
+
+- [HTTP Overview](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview)
+- [HTTP Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [HTTP Status](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)
+- [fetch Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+- [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+- [HTTP Content Negotiation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)
+
+---
+
+## Snippet 2: Streaming Fetch
+
+<Snippet path="02-streaming-fetch.mjs" lang="js" />
+
+### Questions
+
+1. What does a `for await...of` loop do?
+1. How many bytes are in each chunk?
+1. How long is each chunk?
+1. Is the number and length of each chunk deterministic? (try a few times)
+1. How long is the duration between receiving chunks? (use [process.hrtime.bigint()](https://nodejs.org/api/process.html#processhrtimebigint))
+1. How long does receiving the whole body take?
+1. Why does the number of chunks not change if you set the `accept-encoding` header to an empty string? (no gzip encoding)
+1. How do the timings change if you receive an uncompressed response?
+1. What is inside the chunks? Try to convert it to text. (use the Node.js [TextDecoder](https://nodejs.org/api/util.html#class-utiltextdecoder) with the appropriate flags)
+1. Why is it beneficial to have a chunked response?
+
+---
+
+## Snippet 3: node:https
+
+<Snippet path="03-node-https.mjs" lang="js" />
+
+### Questions
+
+1. How does the `node:https` API differ from the `fetch` API?
+1. What happens if you comment out the `request.end()` line?
+1. How do you set request headers?
+1. What is the HTTP version of this communication? Can you get the HTTP version with `fetch`?
+1. Do the response headers differ from the `fetch` version?
+1. Do the chunks or chunk timing differ from the `fetch` version?
+1. Decode the chunks.
+1. Set the `accept-encoding: gzip` header. What happens to the chunk sizes?
+1. Try to utf-8 decode the gzip response. Why doesn't it work?
+
+---
+
+## Project 1: Implement a simple `fetch`
+
+The goal of this project is to implement a simplified version of Node.js `fetch` with the `node:https` API.

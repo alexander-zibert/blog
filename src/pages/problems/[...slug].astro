@@ -1,0 +1,24 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const problems = await getCollection("problem");
+  return problems.map((problem) => ({
+    params: { slug: problem.slug },
+    props: problem,
+  }));
+}
+type Props = CollectionEntry<"problem">;
+
+const problem = Astro.props;
+const { Content } = await problem.render();
+---
+
+<BaseLayout title={problem.data.title} description={problem.data.title}>
+  <Fragment slot="head"></Fragment>
+  <Fragment slot="main">
+    <h2>Problem: {problem.data.title}</h2>
+    <Content />
+  </Fragment>
+</BaseLayout>

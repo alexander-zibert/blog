@@ -9,7 +9,7 @@ const requestOptions = {
 const request = https.request(requestOptions);
 request.setHeader("user-agent", "nodejs");
 
-request.on("response", function responseHandler(res) {
+request.on("response", async function responseHandler(res) {
   console.log("Status Code:", res.statusCode, res.statusMessage);
   console.log("HTTP Version:", res.httpVersion);
   console.log("\n## Headers");
@@ -17,9 +17,9 @@ request.on("response", function responseHandler(res) {
 
   console.log("\n## Body Chunks");
   let chunkIdx = 0;
-  res.on("data", function chunkListener(chunk) {
+  for await (const chunk of res) {
     console.log(chunkIdx++, chunk.length);
-  });
+  }
 });
 
 request.end();

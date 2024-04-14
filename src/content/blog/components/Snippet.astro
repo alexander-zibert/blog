@@ -4,33 +4,8 @@ import fs from "node:fs";
 
 const { path, parts, ...rest } = Astro.props;
 
-const fileContents = fs
+const code = fs
   .readFileSync(`src/content/blog/snippets/${path}`, { encoding: "utf-8" })
-  .trim();
-const lines = fileContents.split("\n");
-
-const codeParts: string[] = [];
-let currentPart = null;
-let result = "";
-for (const line of lines) {
-  if (currentPart === null && line.startsWith(`// start-`)) {
-    currentPart = line.slice("// start-".length);
-    continue;
-  }
-  if (currentPart && line == `// end-${currentPart}`) {
-    codeParts.push(result);
-    currentPart = null;
-    result = "";
-    continue;
-  }
-  if (currentPart) {
-    result += line + "\n";
-  }
-}
-
-const code = (parts as number[])
-  .map((part) => codeParts[part])
-  .join("\n")
   .trim();
 ---
 
