@@ -1,0 +1,137 @@
+---
+title: "Backend Roadmap"
+description: ""
+pubDate: "2024-05-10"
+heroImage: "./images/two-testing-teams.jpeg"
+heroImageAlt: ""
+wip: true
+---
+
+- Basic JavaScript (2 Weeks)
+  - console.log
+  - basic operations and types
+    - template literals
+  - `node:test` & `node:assert`
+  - variables
+  - if/else
+  - loops
+  - functions
+  - modules
+  - scope & closure
+  - timers / callbacks / promises / event loop
+  - generators&iterators / async&await / async generators
+- Node.js
+  - `node:process`
+  - `node:buffer` / TypedArray
+  - `util.TextDecoder` & `util.TextEncoder`
+  - Filesystem / Streams
+  - TCP / HTTP / Basic HTML
+  - UDP / DNS
+  - Crypto / TLS / HTTPS / HTTP2
+- Browser
+  - DOM
+  - Events
+  - Forms
+  - Cookies, LocalStorage/SessionStorage, IndexedDB
+  - Fetch
+  - Caching
+  - CORS / CSP
+  - Short Polling / Long Polling / Server Sent Events / WebSocket
+
+## Projects
+
+- http://csbin.io/
+- Array Methods
+- Generator Based Array Methods
+  - https://jrsinclair.com/articles/2022/why-would-anyone-need-javascript-generator-functions/
+- cp
+- cat
+- find
+- grep
+- hexdump [-C] [-s] [-b]
+- HTML File Explorer
+- String decoding / Encoding
+- HTML5 Cnavas to video
+  - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/captureStream
+  - https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder
+  - https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Recording_a_media_element
+- SQLite Reader
+- Walking the DOM with own implementation fo getElement\*, querySelector\*
+- Redis
+- Docker
+- Rate Limiters
+- Circuit Breaker
+- Retry with Backoff and Jitter
+- Event Sourcing
+- https://roadmap.sh/sql
+- [Typing Practice App](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/Typing-Practice-App.md)
+
+## Technology
+
+- ClickHouse
+- DynamoDB
+- Typesense
+- SQS
+- SNS
+- S3
+- EBS
+- EC2
+- ECS
+
+## Books
+
+- Al Sweigart: https://inventwithpython.com/
+- Petzold: Code: The Hidden Language of Computer Hardware and Software
+- Kerrisk: The Linux Programming Interface
+- Kleppmann: Designing Data-Intensive Applications
+- Bryant: Computer Systems: A Programmer's Perspective
+- Gregg: Systems Performance: Enterprise and the Cloud
+- Gregg: BPF Performance Tools
+- https://craftinginterpreters.com/contents.html
+- https://browser.engineering/
+- Vitillo: Understanding Distributed Systems
+- https://hypermedia.systems/book/contents/
+
+## Codewars
+
+- Fundamentals
+  - [Conversion between Kilobyte and KibiByte](https://www.codewars.com/kata/5a115ff080171f9651000046)
+- Numbers
+  - [Adding Binary Numbers](https://www.codewars.com/kata/55c11989e13716e35f000013)
+  - [IEEE 754 floating point numbers to Binary](https://www.codewars.com/kata/5efcaedf95d7110017896ced)
+  - [Float to Binary Conversion](https://www.codewars.com/kata/540ddb07716ab397e1000797)
+  - [Classify a floating point number](https://www.codewars.com/kata/5f1ab7bd5af35f000f4ff875)
+  - [Two's Complement](https://www.codewars.com/kata/58d4785a2285e7795c00013b)
+- Compression
+  - [Basic Compression](https://www.codewars.com/kata/5914e068f05d9a011e000054)
+  - [LZ78 compression](https://www.codewars.com/kata/5db42a943c3c65001dcedb1a)
+- Bytes
+  - [Simple Fun #8: Kill K-th Bit](https://www.codewars.com/kata/58844f1a76933b1cd0000023)
+  - [Base Conversion](https://www.codewars.com/kata/526a569ca578d7e6e300034e)
+  - [Endianness Conversion](https://www.codewars.com/kata/56f2dd31e40b7042ad001026)
+  - [Bit Counting](https://www.codewars.com/kata/526571aae218b8ee490006f4)
+  - [Base64 Encoding](https://www.codewars.com/kata/5270f22f862516c686000161)
+  - [Bitmasks](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/Bit-Masks-App.md)
+- Crypto
+  - [Implementing SHA-1](https://www.codewars.com/kata/56f2f3dfe40b70a005001389)
+  - [Simple RSA Implementation](https://www.codewars.com/kata/56f1e42f0cd8bc1e6e001713)
+- Networking
+  - [Networking 101/2: Identify the IPv4 address Class](https://www.codewars.com/kata/628ba76a85a2d500649da696)
+  - [Networking 101/3: Find the number of valid Hosts in a Subnet](https://www.codewars.com/kata/6285147937ddcf3ac2b068ce)
+  - [IPv4 to int32](https://www.codewars.com/kata/52ea928a1ef5cfec800003ee)
+  - [int32 to IPv4](https://www.codewars.com/kata/52e88b39ffb6ac53a400022e)
+- Dates
+  - Convert UTC Timestamp to HH:MM:SS.ddd
+  - Calculate Leap Years (https://www.codewars.com/kata/526c7363236867513f0005ca)
+  - Convert UTC Timestamp to ISO String
+  - Convert ISO String to UTC Timestamp
+  - Round to nearest 1, 5, 10, 15, 30, 60 Minutes
+  - Program a world clock where the current time is displayed for all timezones (something like https://www.timeanddate.com/worldclock/)
+  - Time Difference between local timezone and all others (e.g. https://www.timeanddate.com/time/difference/germany/aachen)
+- JSON
+  - [JSON Stringify](https://www.codewars.com/kata/55abfba8f5ed0e9eec00004a)
+  - [JSON Parser](https://www.codewars.com/kata/55aa170b54c32468c30000a9)
+- Promises
+  - [Promisify Callbacks](https://www.codewars.com/kata/64439042c5ec660940684fbf)
+  - [Write your own Promise implementation](https://www.codewars.com/kata/65400456da59f631b0e557ff)
+  - [Create Your Own "Promise.all()"](https://www.codewars.com/kata/580e6adffbf2be2e870005c0)

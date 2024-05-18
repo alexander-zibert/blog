@@ -1,0 +1,91 @@
+---
+title: "Exploring Text Encodings with Node.js"
+description: ""
+pubDate: "2024-05-05"
+heroImage: "./images/two-testing-teams.jpeg"
+heroImageAlt: ""
+wip: true
+---
+
+import Snippet from "./components/Snippet.astro";
+
+https://www.unicode.org/Public/
+https://en.wikipedia.org/wiki/UTF-8
+https://en.wikipedia.org/wiki/Unicode
+https://en.wikipedia.org/wiki/UTF-16
+https://gregtatum.com/writing/2021/encoding-text-utf-32-utf-16-unicode/
+https://gregtatum.com/writing/2021/diacritical-marks/
+https://mathiasbynens.be/notes/javascript-encoding
+https://mathiasbynens.be/notes/javascript-unicode
+https://en.wikipedia.org/wiki/Plane_(Unicode)
+https://www.unicode.org/versions/Unicode15.1.0/
+https://www.compart.com/en/unicode/plane
+https://emojipedia.org/unicode-1.1
+https://exploringjs.com/impatient-js/ch_unicode.html
+https://exploringjs.com/impatient-js/ch_strings.html#atoms-of-text
+
+https://javascript.info/regular-expressions
+https://javascript.info/regexp-character-classes
+https://javascript.info/regexp-unicode
+
+## Snippet 1: ASCII Decoding
+
+ASCII is the simplest well-known character encoding. A character encoding basically is a mapping between human readable characters and a single number, which can be interpreted by a computer. Let's explore ASCII with the following snippet.
+
+<Snippet path="ascii-decoder.mjs" lang="js" />
+
+### Questions
+
+1. The ASCII encoding encodes characters as 7-Bit numbers. Look up a ASCII table and try to convert the bytes yourself. Run the code for verification.
+1. Try to encode a simple string in ASCII and verify it by running the code.
+1. Add some control characters to the byte array (e.g. `BEL` or `BS`). Be sure to run the script with Node.js in a real terminal.
+1. In what number range does ASCII encode characters?
+1. Try to add a few numbers outside the ASCII range to the bytes array. What do you expect to happen? What happens actually?
+
+### Ressources
+
+- [Wiki: ASCII](https://en.wikipedia.org/wiki/ASCII)
+- [MDN: TextDecoder API](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder/encoding)
+
+---
+
+## Snippet 2: Simple ASCII Encoder
+
+The method `.charCodeAt(i)` on a string gives you the unicode code unit of the character at index `i`. A unicode code unit is basically just a fancy word for a number which represents a character. Conveniently, unicode was standarized after ASCII and has the exact same character to number mapping as ASCII. We can use this fact to write a simple ASCII encoder.
+
+<Snippet path="ascii-encoder.mjs" lang="js" />
+
+### Questions
+
+1. Read the snippet. What output do you expect?
+1. Choose a string and encode it to ASCII with the function in the snippet. Test the function by using a `TextDecoder` to decode the `Uint8Array`.
+1. Write a similiar encoder for the [ISO-8859-1 / latin1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character encoding.
+
+<details>
+  <summary>Hint for 3</summary>
+  Use the fact that the unicode Latin-1 Supplement block (code units 0080–00FF) and
+  the ASCII part collectively corresponds to IANA Latin-1. [(source)](https://en.wikipedia.org/wiki/Latin_script_in_Unicode)
+</details>
+
+---
+
+## Snippet 3: ASCII Supersets
+
+There are hundres of text encodings. Most of the well-known ones were specified after ASCII and as such try to support it for legacy reasons. But which ones are a proper superset of ASCII and can decode all ASCII encoded text?
+
+<Snippet path="test-ascii-decoders.mjs" lang="js" />
+
+### Questions
+
+1. Which encodings in this snippet are a proper superset of ASCII? Which are mostly similiar but differ in a few characters?
+1. What does the `escapeControl` function do and how does the regex work?
+1. Is this an exhaustive test?
+1. Adjust the test for the [ISO-8859-1 / latin1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character encoding. Which WHATWG encodings are a superset of the latin1 encoding? Which encodings are mostly similiar?
+1. Which ISO-8859 encodings were used for russian, which for turkish? Can any fixed-length single-byte character encoding be used to use Cyrillic and Turkish in the same text?
+1. How many characters are frequently used in modern Japanese? Can any fixed-length single-byte character encoding be used for Japanese?
+1. (optional) The web does not expose APIs for legacy single-byte character encodings. Implement one for each one specified in WHATWG. Use the encoding algorithm specified in [WHATWG](https://encoding.spec.whatwg.org/#legacy-single-byte-encodings). The [WHATWG indexes.json](https://encoding.spec.whatwg.org/indexes.json) file will probably be helpful. Test exhaustively with the appropriate `TextDecoder`.
+
+### Ressources
+
+- [MDN: Unicode Character Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Unicode_character_class_escape)
+- [Unicode Categories in Regex](https://www.regular-expressions.info/unicode.html)
